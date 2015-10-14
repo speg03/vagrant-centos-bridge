@@ -30,3 +30,20 @@ DEVICE=eth0
 PEERDNS=no
 #VAGRANT-END
 ```
+
+`journalctl -u NetworkManager`
+```
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: <info>  updating /etc/sysconfig/network-scripts/ifcfg-eth0
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: <info>  (eth0): device state change: activated -> deactivating (reason 'connection-removed') [100 110 38]
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: <info>  (eth0): device state change: deactivating -> unmanaged (reason 'unmanaged') [110 10 3]
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: <info>  (eth0): deactivating device (reason 'unmanaged') [3]
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: <info>  (eth0): canceled DHCP transaction, DHCP client pid 619
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: <info>  (eth0): DHCPv4 state changed bound -> done
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: <error> [1444829571.809513] [platform/nm-linux-platform.c:2352] link_change(): Netlink error changing link 2:  <DOWN> mtu 0 (1) driver 'e1000' udi '/sys/devices/pci0000:00/0000:00:03.0/net/eth0': Address family not supported
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: <warn>  (eth0): failed to disable userspace IPv6LL address handling
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: <info>  parsing /etc/sysconfig/network-scripts/ifcfg-lo ...
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: <info>  (eth0): link disconnected
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: (NetworkManager:573): GLib-CRITICAL **: g_variant_is_object_path: assertion 'string != NULL' failed
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: ** (NetworkManager:573): CRITICAL **: marshal_object_path: assertion 'g_variant_is_object_path (path)' failed
+10月 14 09:32:51 localhost.localdomain NetworkManager[573]: ** (NetworkManager:573): CRITICAL **: Could not marshal argument 2 for Action: type GHashTable_gchararray+GValue_, value ((GHashTable_gchararray+GValue_*) 0x7fc0984a08c0)
+```
