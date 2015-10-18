@@ -47,3 +47,33 @@ PEERDNS=no
 10月 14 09:32:51 localhost.localdomain NetworkManager[573]: ** (NetworkManager:573): CRITICAL **: marshal_object_path: assertion 'g_variant_is_object_path (path)' failed
 10月 14 09:32:51 localhost.localdomain NetworkManager[573]: ** (NetworkManager:573): CRITICAL **: Could not marshal argument 2 for Action: type GHashTable_gchararray+GValue_, value ((GHashTable_gchararray+GValue_*) 0x7fc0984a08c0)
 ```
+
+## vagrant/configure_networks.rb
+
+Vagrantのネットワーク自動設定に関するコード
+
+https://github.com/mitchellh/vagrant/blob/v1.7.4/plugins/guests/fedora/cap/configure_networks.rb
+
+各変数に設定されている内容を確認した。
+
+### 初回起動時
+
+自動設定するインタフェースはeth1
+
+```
+networks: [{:type=>:static, :adapter_ip=>"192.168.33.1", :ip=>"192.168.33.10", :netmask=>"255.255.255.0", :auto_config=>true, :interface=>1}]
+interface_names: ["eth0", "eth1"]
+interface_names_by_slot: ["eth1"]
+mac_addresses: ["52:54:00:d3:eb:a4", "08:00:27:89:d5:94"]
+```
+
+### 2回目起動時
+
+自動設定するインタフェースがeth0に変わっている。
+
+```
+networks: [{:type=>:static, :adapter_ip=>"192.168.33.1", :ip=>"192.168.33.10", :netmask=>"255.255.255.0", :auto_config=>true, :interface=>1}]
+interface_names: ["br0", "eth0", "eth1"]
+interface_names_by_slot: ["eth0"]
+mac_addresses: ["aa:08:d8:3b:bd:41", "52:54:00:d3:eb:a4", "08:00:27:89:d5:94"]
+```
